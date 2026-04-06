@@ -91,6 +91,11 @@ nav {
   display: flex;
   align-items: center;
   gap: 26px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar {
+  display: none;
 }
 nav a {
   color: #1f2937;
@@ -893,26 +898,110 @@ main {
   font-weight: 700;
   box-shadow: 0 8px 20px rgba(239,68,68,0.3);
 }
-@media (max-width: 920px) {
+@media (max-width: 1100px) {
   header {padding: 18px 24px;}
-  .hero {grid-template-columns: 1fr; gap: 36px;}
-  .hero-card {min-height: 360px;}
-  .experience-grid {grid-template-columns: 1fr;}
-  .contact-layout {grid-template-columns: 1fr;}
+  nav {gap: 16px;}
+  nav a {font-size: 0.95rem; white-space: nowrap;}
+  main {padding: 112px 24px 48px;}
+  .about-section,
+  .experience-section,
+  .certifications-section,
+  .education-section,
+  .resume-section,
+  .contact-section {
+    padding: 0 24px 36px;
+  }
+  .about-layout {
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 28px;
+    padding: 24px;
+  }
+  .hero {
+    gap: 34px;
+  }
+}
+@media (max-width: 920px) {
+  header {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  nav {
+    width: 100%;
+    padding-bottom: 4px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .hero-card {
+    min-height: 320px;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-image-card {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .experience-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .resume-frame {
+    height: 72vh;
+  }
 }
 @media (max-width: 640px) {
-  nav {display: none;}
-  main {padding: 100px 24px 40px;}
-  .hero-text h1 {font-size: 3rem;}
+  main {padding: 104px 16px 36px;}
+  .brand-avatar {
+    width: 42px;
+    height: 42px;
+  }
+  .brand-text {
+    font-size: 1rem;
+  }
+  nav {
+    gap: 14px;
+  }
+  nav a {
+    font-size: 0.92rem;
+  }
+  .hero-text h1 {font-size: clamp(2.2rem, 10vw, 3rem);}
   .hero-text .hero-actions {flex-direction: column; align-items: stretch;}
+  .hero-card {
+    min-height: 270px;
+    max-width: 300px;
+  }
   .social-list {justify-content: flex-start;}
-  .experience-section {padding: 0 24px 40px;}
-  .experience-card {flex-direction: column; align-items: flex-start;}
-  .logo-badge {width: 72px; height: 72px;}
-  .contact-section {padding: 0 24px 40px;}
+  .about-section,
+  .experience-section,
+  .certifications-section,
+  .education-section,
+  .resume-section,
+  .contact-section {
+    padding: 0 16px 28px;
+  }
+  .about-layout,
   .contact-panel,
-  .contact-form-card {padding: 28px;}
+  .contact-form-card,
+  .experience-card,
+  .education-card,
+  .cert-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .logo-badge {width: 68px; height: 68px;}
+  .resume-section .section-header {
+    flex-wrap: wrap;
+  }
+  .resume-frame {
+    height: 68vh;
+    border-radius: 20px;
+  }
   .site-footer {padding: 0;}
+  .footer-shell {padding: 26px 18px 18px;}
   .footer-bottom {flex-direction: column; align-items: flex-start;}
   .footer-connect {text-align: left;}
   .footer-social {justify-content: flex-start;}
