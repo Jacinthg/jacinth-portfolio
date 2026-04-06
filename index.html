@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacinth Portfolio</title>
+<link rel="icon" href="Jacinth Coat photo.jpg" type="image/jpeg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<style>
+:root {
+  --bg: #f8f9fd;
+  --surface: rgba(255,255,255,0.9);
+  --text: #101828;
+  --muted: #64748b;
+  --accent: #ff7a18;
+  --accent-dark: #1f3cff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  position: relative;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(180deg, #edf2ff 0%, #f8fafc 45%, #f6f8fb 100%);
+  color: var(--text);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 22%, rgba(96,165,250,0.12), transparent 18%),
+              radial-gradient(circle at 80% 18%, rgba(56,189,248,0.08), transparent 20%);
+  pointer-events: none;
+}
+#particles-js {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(15,23,42,0.08);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.brand-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(31,60,255,0.18);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+}
+.brand-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.brand-text {
+  font-size: 1.05rem;
+}
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.9rem;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+nav a {
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+nav a:hover,
+nav a.active {
+  color: var(--accent-dark);
+}
+main {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 120px 40px 60px;
+  overflow: hidden;
+}
+.page-section {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.page-section.hidden {
+  display: none;
+}
+.hero {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-text {
+  max-width: 580px;
+}
+.hero-text h1 {
+  margin: 0 0 16px;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.hero-text h1 span {
+  color: var(--accent);
+}
+.hero-text p {
+  margin: 0 0 32px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.hero-text .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+.btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 16px 28px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-dark), #8b5cf6);
+  color: #fff;
+  box-shadow: 0 18px 45px rgba(31,60,255,0.18);
+}
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: linear-gradient(135deg, rgba(31,60,255,0.12), rgba(255,122,24,0.12));
+  color: var(--accent-dark);
+  border: 1px solid rgba(31,60,255,0.18);
+  box-shadow: 0 14px 30px rgba(31,60,255,0.08);
+}
+.btn-secondary:hover {
+  background: linear-gradient(135deg, rgba(31,60,255,0.2), rgba(255,122,24,0.22));
+}
+.social-list {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+.social-list a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.social-list a:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+}
+.hero-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe681, #ffbc4b 45%, #f0a800 55%, #fca72d 72%);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 40px 90px rgba(15,23,42,0.18);
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.26);
+}
+.hero-card img {
+  width: 66%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+.experience-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.about-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.about-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 32px 32px 32px;
+  border-radius: 32px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 30px 80px rgba(15,23,42,0.12);
+}
+.about-image-card {
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(243,244,246,0.9));
+  box-shadow: 0 30px 60px rgba(15,23,42,0.12);
+}
+.about-image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.about-content h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2.25rem, 2.8vw, 3rem);
+  letter-spacing: -0.04em;
+}
+.about-content p {
+  margin: 18px 0;
+  line-height: 1.85;
+  color: #475569;
+  max-width: 700px;
+}
+.about-content p strong {
+  color: #1d4ed8;
+}
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+.about-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.about-actions .primary {
+  background: linear-gradient(135deg, var(--accent-dark), #8b5cf6);
+  color: #fff;
+}
+.about-actions .secondary {
+  background: rgba(15,23,42,0.08);
+  color: #111827;
+}
+@media (max-width: 960px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.certifications-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 30px 70px rgba(15,23,42,0.08);
+}
+.cert-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 1px solid rgba(15,23,42,0.08);
+}
+.cert-card h3 {
+  margin: 18px 0 12px;
+  font-size: 1.05rem;
+  color: #1f2937;
+}
+.cert-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+}
+.cert-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1f2937;
+}
+.cert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 20px;
+}
+.resume-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.resume-section .section-header {
+  gap: 12px;
+}
+.resume-section .section-header h2 {
+  margin: 0;
+}
+.resume-frame {
+  width: 100%;
+  height: calc(100vh - 220px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 30px 80px rgba(15,23,42,0.12);
+  display: flex;
+}
+.resume-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(31,60,255,0.22);
+}
+.resume-back-btn:hover {
+  background: linear-gradient(135deg, #1b2fcb, #ff8f3d);
+}
+.resume-frame object {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+@media (max-width: 920px) {
+  .resume-frame {
+    height: calc(100vh - 190px);
+  }
+}
+@media (max-width: 640px) {
+  .resume-back-btn {
+    padding: 9px 14px;
+    font-size: 0.9rem;
+  }
+}
+ .cert-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-dark), #8b5cf6);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.cert-link:hover {
+  opacity: 0.95;
+}
+.cert-card img {
+  cursor: pointer;
+}
+.cert-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15,23,42,0.92);
+}
+.cert-fullscreen-overlay.hidden {
+  display: none;
+}
+.cert-fullscreen-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 24px;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.45);
+}
+.cert-fullscreen-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.cert-fullscreen-close:hover {
+  background: rgba(255,255,255,0.28);
+}
+.project-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15,23,42,0.88);
+}
+.project-overlay.hidden {
+  display: none;
+}
+.project-modal {
+  width: min(980px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 35px 100px rgba(2,6,23,0.35);
+  padding: 22px;
+}
+.project-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.project-modal-title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #0f172a;
+}
+.project-close {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.08);
+  color: #0f172a;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.project-close:hover {
+  background: rgba(15,23,42,0.14);
+}
+.project-preview-frame {
+  width: 100%;
+  min-height: 62vh;
+  border: 1px solid rgba(15,23,42,0.12);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+.project-preview-image {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(15,23,42,0.12);
+}
+.project-message {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-dark), #8b5cf6);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+.project-link:hover {
+  opacity: 0.95;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.section-header span {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.section-header h2 {
+  margin: 0;
+  font-size: clamp(2rem, 2.5vw, 2.75rem);
+}
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.experience-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 24px 50px rgba(15,23,42,0.08);
+}
+.logo-badge {
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  overflow: hidden;
+}
+.logo-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+.experience-body h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+.experience-body .company {
+  margin: 0;
+  color: #475569;
+  font-weight: 600;
+}
+.experience-body .duration {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.education-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+.education-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 24px 50px rgba(15,23,42,0.08);
+}
+.education-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,122,18,0.15), rgba(31,60,255,0.15));
+  margin-bottom: 16px;
+  font-size: 2rem;
+  color: var(--accent);
+}
+.education-card h3 {
+  margin: 8px 0;
+  font-size: 1.3rem;
+  color: #1f2937;
+  font-weight: 700;
+}
+.education-school {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.education-year {
+  margin: 4px 0 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.education-details {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.education-details strong {
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+.contact-section {
+  width: min(1180px, 100%);
+  margin: 0 auto 60px;
+  padding: 0 40px 40px;
+}
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 24px;
+  align-items: start;
+}
+.contact-panel {
+  background: rgba(255,255,255,0.95);
+  border-radius: 26px;
+  padding: 40px;
+  box-shadow: 0 24px 60px rgba(15,23,42,0.08);
+  margin: 0;
+}
+.contact-panel h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 2.5vw, 2.75rem);
+}
+.contact-panel p {
+  margin: 14px 0;
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--accent-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+.contact-link i {
+  font-size: 1rem;
+}
+.contact-form-card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 26px;
+  padding: 40px;
+  box-shadow: 0 24px 60px rgba(15,23,42,0.08);
+}
+.contact-layout,
+.contact-panel,
+.contact-form-card,
+.contact-form,
+.contact-form * {
+  pointer-events: auto;
+}
+.contact-form {
+  display: grid;
+  gap: 18px;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: 18px;
+  padding: 14px 16px;
+  font: inherit;
+  color: #0f172a;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(79,70,229,0.55);
+  box-shadow: 0 0 0 4px rgba(244,114,182,0.12);
+}
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+.contact-form .submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 22px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  box-shadow: 0 18px 45px rgba(168,85,247,0.24);
+}
+.contact-form .submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.contact-status {
+  min-height: 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.contact-status.success {
+  color: #059669;
+}
+.contact-status.error {
+  color: #dc2626;
+}
+.site-footer {
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 0;
+}
+.footer-shell {
+  position: relative;
+  border-radius: 0;
+  padding: 34px 30px 24px;
+  background: rgba(15,23,42,0.96);
+  color: #e2e8f0;
+  box-shadow: 0 22px 55px rgba(15,23,42,0.25);
+  overflow: hidden;
+}
+.footer-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(59,130,246,0.2), transparent 36%),
+              radial-gradient(circle at 85% 85%, rgba(244,114,182,0.2), transparent 34%);
+  pointer-events: none;
+}
+.footer-center {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.footer-mail,
+.footer-address {
+  margin: 0;
+}
+.footer-mail {
+  color: #f8fafc;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+.footer-address {
+  margin-top: 10px;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.footer-copy {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+.footer-connect {
+  text-align: right;
+}
+.footer-connect p {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: #f8fafc;
+  background: rgba(148,163,184,0.18);
+  border: 1px solid rgba(148,163,184,0.35);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.footer-social a:hover {
+  transform: translateY(-2px);
+  background: rgba(99,102,241,0.44);
+}
+.floating-badge {
+  left: 32px;
+  bottom: 32px;
+  z-index: 10;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #0f172a;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 24px 50px rgba(15,23,42,0.2);
+}
+.floating-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.floating-badge .badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.75rem;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(239,68,68,0.3);
+}
+@media (max-width: 920px) {
+  header {padding: 18px 24px;}
+  .hero {grid-template-columns: 1fr; gap: 36px;}
+  .hero-card {min-height: 360px;}
+  .experience-grid {grid-template-columns: 1fr;}
+  .contact-layout {grid-template-columns: 1fr;}
+}
+@media (max-width: 640px) {
+  nav {display: none;}
+  main {padding: 100px 24px 40px;}
+  .hero-text h1 {font-size: 3rem;}
+  .hero-text .hero-actions {flex-direction: column; align-items: stretch;}
+  .social-list {justify-content: flex-start;}
+  .experience-section {padding: 0 24px 40px;}
+  .experience-card {flex-direction: column; align-items: flex-start;}
+  .logo-badge {width: 72px; height: 72px;}
+  .contact-section {padding: 0 24px 40px;}
+  .contact-panel,
+  .contact-form-card {padding: 28px;}
+  .site-footer {padding: 0;}
+  .footer-bottom {flex-direction: column; align-items: flex-start;}
+  .footer-connect {text-align: left;}
+  .footer-social {justify-content: flex-start;}
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+  <div class="brand">
+    <div class="brand-avatar">
+      <img src="Jacinth Coat photo.jpg" alt="Jacinth avatar">
+    </div>
+    <span class="brand-text">Jacinth</span>
+  </div>
+  <nav>
+    <a class="active" href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#experience">Experience</a>
+    <a href="#project">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main id="home" class="page-section">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi There,<br>I'm <span>Jacinth</span></h1>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#about" id="hero-about-btn">About Me <i class="fa-solid fa-arrow-down" style="margin-left: 10px;"></i></a>
+        <a class="btn-secondary" href="#resume-viewer" id="hero-view-resume">View Resume</a>
+      </div>
+      <div class="social-list">
+        <a href="https://github.com/Jacinthg" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/jacinth-g-4a078b232/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/jacinth.03/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="Jacinth Coat photo.jpg" alt="Jacinth portrait">
+    </div>
+  </section>
+</main>
+<section id="about" class="about-section page-section hidden">
+  <div class="section-header">
+    <h2>About Me</h2>
+  </div>
+  <div class="about-layout">
+    <div class="about-image-card">
+      <img src="Jacinth Coat photo.jpg" alt="Jacinth portrait">
+    </div>
+    <div class="about-content">
+      <p>Hello! I’m <strong>Jacinth G</strong>, an Artificial Intelligence and Data Science graduate aspiring to become a <strong>Full Stack Developer</strong> based in Bengaluru.</p>
+      <p>I specialize in building modern, responsive, and efficient web applications using technologies like <strong>HTML, Python,Java, Software Testing, SQL</strong>. I love transforming ideas into reality by developing user-friendly, real-world applications, and solving challenging problems.</p>
+      <p>I recently secured a role as an <strong>Advanced Application Development Associate</strong> at Accenture, where I’ll grow my skills and contribute to innovative projects in a dynamic setting.</p>
+      <p>I’ve built several projects including a personal portfolio website, a task management app, and an AI-powered Stock market predictor, which improved my proficiency in creating real-time, interactive applications.</p>
+      <div class="hero-actions" style="margin-top: 24px;">
+        <a class="btn-secondary" href="#resume-viewer" id="about-view-resume">View Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="resume-viewer" class="resume-section page-section hidden">
+  <div class="section-header">
+    <button id="resume-back-btn" class="resume-back-btn" type="button">← Back</button>
+    <h2>Resume</h2>
+  </div>
+  <div class="resume-frame">
+    <object data="Jacinth Resume 1.pdf" type="application/pdf" width="100%" height="100%">
+      <p>Your browser does not support inline PDF viewing. <a href="Jacinth Resume 1.pdf" target="_blank">Open Resume</a></p>
+    </object>
+  </div>
+</section>
+<section id="experience" class="experience-section page-section hidden">
+  <div class="section-header">
+    <h2>Experience</h2>
+  </div>
+  <div class="experience-grid">
+    <article class="experience-card">
+      <div class="logo-badge">
+        <img src="AICTE.png" alt="AICTE logo">
+      </div>
+      <div class="experience-body">
+        <h3>Android developer</h3>
+        <p class="company">AICTE</p>
+        <p class="duration">Jan 2024 – Mar 2024</p>
+        <p class="description">Debugged application errors and optimized performance, resulting in a smoother user experience. Integrated third-party APIs to enhance application functionality and manage data retrieval efficiently.</p>
+      </div>
+    </article>
+    <article class="experience-card">
+      <div class="logo-badge">
+        <img src="Jivrus technologies.jpg" alt="Jivrus technologies logo">
+      </div>
+      <div class="experience-body">
+        <h3>Software Tester</h3>
+        <p class="company">Jivrus technologies</p>
+        <p class="duration">July 2025 – Present</p>
+        <p class="description">Collaborate with the development team to document bugs and verify fixes, strictly adhering to the Software Development Life Cycle (SDLC). Execute comprehensive manual test cases to identify software defects.</p>
+      </div>
+    </article>
+  </div>
+</section>
+<section id="project" class="experience-section page-section hidden">
+  <div class="section-header">
+    <h2>Projects</h2>
+  </div>
+  <div class="experience-grid">
+    <article class="experience-card">
+      <div class="experience-body">
+        <h3>Stock_Market_price_Prediction</h3>
+        <p class="company">GitHub Repository</p>
+        <p class="duration">Python</p>
+        <p class="description">Machine learning project focused on stock market price prediction.</p>
+        <div class="project-actions">
+          <a class="project-link" href="https://github.com/Jacinthg/Stock_Market_price_Prediction" target="_blank" rel="noopener noreferrer" data-project-name="Stock_Market_price_Prediction" data-repo-url="https://github.com/Jacinthg/Stock_Market_price_Prediction" data-live-url="" data-image-url="">View GitHub Repo</a>
+        </div>
+      </div>
+    </article>
+    <article class="experience-card">
+      <div class="experience-body">
+        <h3>annual_spending_of_customers_in_a_mall</h3>
+        <p class="company">GitHub Repository</p>
+        <p class="duration">Python</p>
+        <p class="description">Data analysis project for understanding annual customer spending patterns in a mall dataset.</p>
+        <div class="project-actions">
+          <a class="project-link" href="https://github.com/Jacinthg/annual_spending_of_customers_in_a_mall" target="_blank" rel="noopener noreferrer" data-project-name="annual_spending_of_customers_in_a_mall" data-repo-url="https://github.com/Jacinthg/annual_spending_of_customers_in_a_mall" data-live-url="" data-image-url="">View GitHub Repo</a>
+        </div>
+      </div>
+    </article>
+    <article class="experience-card">
+      <div class="experience-body">
+        <h3>Bus_reservation_system</h3>
+        <p class="company">GitHub Repository</p>
+        <p class="duration">HTML</p>
+        <p class="description">Web-based bus reservation system project for booking and managing bus tickets.</p>
+        <div class="project-actions">
+          <a class="project-link" href="https://github.com/Jacinthg/Bus_reservation_system" target="_blank" rel="noopener noreferrer" data-project-name="Bus_reservation_system" data-repo-url="https://github.com/Jacinthg/Bus_reservation_system" data-live-url="" data-image-url="https://raw.githubusercontent.com/Jacinthg/Bus_reservation_system/main/Screenshots/login%20page.png">View GitHub Repo</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+<section id="certifications" class="certifications-section page-section hidden">
+  <div class="section-header">
+    <h2>Certifications</h2>
+  </div>
+  <div class="certification-grid">
+    <article class="cert-card">
+      <img src="Certifications/Cognitive (Py for Data science).jpg" alt="Cognitive (Py for Data science) certificate">
+      <h3>Cognitive (Py for Data science)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Cognitive (Py for Data science).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Cognitive (Py for Data science).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Cognitive (Py for Data science) (1).jpg" alt="Cognitive (Py for Data science) certificate">
+      <h3>Cognitive (Py for Data science)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Cognitive (Py for Data science) (1).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Cognitive (Py for Data science) (1).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Cognitive(Intro to cloud).jpg" alt="Cognitive Intro to cloud certificate">
+      <h3>Cognitive (Intro to cloud)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Cognitive(Intro to cloud).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Cognitive(Intro to cloud).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Coursera Augmented Reality.jpg" alt="Coursera Augmented Reality certificate">
+      <h3>Coursera Augmented Reality</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Coursera Augmented Reality.jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Coursera Augmented Reality.jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Coursera Cyber Security.jpg" alt="Coursera Cyber Security certificate">
+      <h3>Coursera Cyber Security</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Coursera Cyber Security.jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Coursera Cyber Security.jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Coursera MS Excel.jpg" alt="Coursera MS Excel certificate">
+      <h3>Coursera MS Excel</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Coursera MS Excel.jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Coursera MS Excel.jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Coursera Wordpress.jpg" alt="Coursera Wordpress certificate">
+      <h3>Coursera Wordpress</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Coursera Wordpress.jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Coursera Wordpress.jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Data Analytics with Python Jas.jpg" alt="Data Analytics with Python Jas certificate">
+      <h3>Data Analytics with Python Jas</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Data Analytics with Python Jas.jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Data Analytics with Python Jas.jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Infosys (Intro to Deep learning).jpg" alt="Infosys Intro to Deep learning certificate">
+      <h3>Infosys (Intro to Deep learning)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Infosys (Intro to Deep learning).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Infosys (Intro to Deep learning).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Infosys (Software Engineering).jpg" alt="Infosys Software Engineering certificate">
+      <h3>Infosys (Software Engineering)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Infosys (Software Engineering).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Infosys (Software Engineering).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Infosys(Intro to AI).jpg" alt="Infosys Intro to AI certificate">
+      <h3>Infosys (Intro to AI)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Infosys(Intro to AI).jpg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Infosys(Intro to AI).jpg" download>Download</a>
+      </div>
+    </article>
+    <article class="cert-card">
+      <img src="Certifications/Naan Mudhalvan(Sem 6).jpeg" alt="Naan Mudhalvan Sem 6 certificate">
+      <h3>Naan Mudhalvan (Sem 6)</h3>
+      <div class="cert-actions">
+        <a class="cert-link" href="Certifications/Naan Mudhalvan(Sem 6).jpeg" target="_blank" rel="noopener noreferrer">View</a>
+        <a class="cert-link" href="Certifications/Naan Mudhalvan(Sem 6).jpeg" download>Download</a>
+      </div>
+    </article>
+  </div>
+</section>
+<div id="cert-fullscreen-overlay" class="cert-fullscreen-overlay hidden" role="dialog" aria-modal="true" aria-label="Certificate fullscreen view">
+  <button class="cert-fullscreen-close" type="button" aria-label="Close certificate view">×</button>
+  <img class="cert-fullscreen-image" src="" alt="Certificate full screen view">
+</div>
+<div id="project-preview-overlay" class="project-overlay hidden" role="dialog" aria-modal="true" aria-label="Project preview">
+  <div class="project-modal">
+    <div class="project-modal-head">
+      <h3 id="project-preview-title" class="project-modal-title">Project Preview</h3>
+      <button id="project-preview-close" class="project-close" type="button" aria-label="Close project preview">×</button>
+    </div>
+    <iframe id="project-preview-frame" class="project-preview-frame hidden" src="" title="Project frontend preview" loading="lazy"></iframe>
+    <img id="project-preview-image" class="project-preview-image hidden" src="" alt="Project preview screenshot">
+    <p id="project-preview-message" class="project-message hidden"></p>
+    <div class="project-actions">
+      <a id="project-preview-live-link" class="project-link hidden" href="#" target="_blank" rel="noopener noreferrer">Open Live Frontend</a>
+      <a id="project-preview-repo-link" class="project-link" href="#" target="_blank" rel="noopener noreferrer">Open GitHub Repo</a>
+    </div>
+  </div>
+</div>
+<section id="education" class="education-section page-section hidden">
+  <div class="section-header">
+    <h2>Education</h2>
+  </div>
+  <div class="education-grid">
+    <article class="education-card">
+      <div class="education-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <h3>AISSE</h3>
+      <p class="education-school">Notre Dame of Holy Cross</p>
+      <p class="education-year">(2018 - 2019)</p>
+      <p class="education-details">I completed with <strong>80.4%</strong> of marks.</p>
+    </article>
+    <article class="education-card">
+      <div class="education-icon">
+        <i class="fas fa-rocket"></i>
+      </div>
+      <h3>AISSCE</h3>
+      <p class="education-school">Notre Dame of Holy Cross</p>
+      <p class="education-year">(2020 - 2021)</p>
+      <p class="education-details">I completed with <strong>84.2%</strong> of marks.</p>
+    </article>
+    <article class="education-card">
+      <div class="education-icon">
+        <i class="fas fa-rocket"></i>
+      </div>
+      <h3>GRADUATION</h3>
+      <p class="education-school">PAAVAI COLLEGE OF ENGINEERING</p>
+      <p class="education-year">(2021 - 2025)</p>
+      <p class="education-details">I completed with <strong>8.24</strong> CGPA.</p>
+    </article>
+  </div>
+</section>
+<section id="contact" class="contact-section page-section hidden">
+  <div class="section-header">
+    <h2>Contact</h2>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-panel">
+      <h2>Let’s connect</h2>
+      <p>If you want to reach out, please send an email to the address below. I’ll get back to you as soon as possible.</p>
+      <a class="contact-link" href="mailto:jacinthg03@gmail.com">
+        <i class="fa-solid fa-envelope"></i>
+        jacinthg03@gmail.com
+      </a>
+    </div>
+    <div class="contact-form-card">
+      <h2 style="margin: 0 0 18px; font-size: clamp(2rem, 2.5vw, 2.75rem);">Send a message</h2>
+      <form id="contact-form" class="contact-form">
+        <div>
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="from_name" type="text" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="from_email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" placeholder="Write your message here" required></textarea>
+        </div>
+        <button class="submit-btn" type="submit" id="contact-submit">Send Message</button>
+        <p id="contact-status" class="contact-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-center">
+      <p class="footer-mail">jacinthg03@gmail.com</p>
+      <p class="footer-address">Hasthampatty salem- Tamil Nadu- India-636007</p>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">Copyright &copy;2026 All rights reserved | This template is made by Jacinth G</p>
+      <div class="footer-connect">
+        <p>Stay connected</p>
+        <div class="footer-social">
+          <a href="https://github.com/Jacinthg" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/jacinth-g-4a078b232/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/jacinth.03/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+if (window.emailjs) {
+  emailjs.init('yF-XS-UqxhCQt9SDa');
+}
+
+if (typeof particlesJS === 'function') {
+particlesJS('particles-js', {
+  particles: {
+    number: { value: 60, density: { enable: true, value_area: 900 } },
+    color: { value: '#64748b' },
+    shape: { type: 'circle' },
+    opacity: { value: 0.6, random: false },
+    size: { value: 3, random: true },
+    line_linked: { enable: true, distance: 160, color: '#94a3b8', opacity: 0.35, width: 1 },
+    move: { enable: true, speed: 1.8, direction: 'none', random: false, straight: false, out_mode: 'out' }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+    modes: { grab: { distance: 180, line_linked: { opacity: 0.25 } }, push: { particles_nb: 4 } }
+  },
+  retina_detect: true
+});
+}
+
+const navLinks = document.querySelectorAll('header nav a');
+const sections = document.querySelectorAll('.page-section');
+
+function activateTab(targetId) {
+  sections.forEach(section => {
+    section.classList.toggle('hidden', section.id !== targetId);
+  });
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href').replace('#', '');
+    link.classList.toggle('active', href === targetId);
+  });
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', event => {
+    const targetId = link.getAttribute('href').replace('#', '');
+    if (['home', 'about', 'experience', 'project', 'contact', 'certifications', 'education', 'resume-viewer'].includes(targetId)) {
+      event.preventDefault();
+      activateTab(targetId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+});
+
+const viewResumeBtn = document.getElementById('view-resume-btn');
+const heroAboutBtn = document.getElementById('hero-about-btn');
+const heroViewResumeBtn = document.getElementById('hero-view-resume');
+const aboutViewResumeBtn = document.getElementById('about-view-resume');
+const resumeBackBtn = document.getElementById('resume-back-btn');
+const resumeSection = document.getElementById('resume-viewer');
+const fullscreenOverlay = document.getElementById('cert-fullscreen-overlay');
+const fullscreenImage = document.querySelector('.cert-fullscreen-image');
+const fullscreenClose = document.querySelector('.cert-fullscreen-close');
+const projectOverlay = document.getElementById('project-preview-overlay');
+const projectClose = document.getElementById('project-preview-close');
+const projectFrame = document.getElementById('project-preview-frame');
+const projectImage = document.getElementById('project-preview-image');
+const projectMessage = document.getElementById('project-preview-message');
+const projectTitle = document.getElementById('project-preview-title');
+const projectRepoLink = document.getElementById('project-preview-repo-link');
+const projectLiveLink = document.getElementById('project-preview-live-link');
+const contactForm = document.getElementById('contact-form');
+const contactSubmit = document.getElementById('contact-submit');
+const contactStatus = document.getElementById('contact-status');
+const EMAILJS_SERVICE_ID = 'service_qy91p5k';
+const EMAILJS_TEMPLATE_ID = 'template_fxhrorh';
+const EMAILJS_PUBLIC_KEY = 'yF-XS-UqxhCQt9SDa';
+
+if (window.emailjs) {
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+} else {
+  console.error('EmailJS SDK is not loaded. Check the emailjs browser script include.');
+}
+
+const showResume = event => {
+  event.preventDefault();
+  resumeSection.classList.remove('hidden');
+  activateTab('resume-viewer');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+const requestFullscreenSafe = element => {
+  if (!element) return;
+  const requestTarget = element.requestFullscreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+  if (!requestTarget) return;
+  const result = requestTarget.call(element);
+  if (result && typeof result.catch === 'function') {
+    result.catch(() => {});
+  }
+};
+const openCertificateFullscreen = (source, altText) => {
+  if (!fullscreenOverlay || !fullscreenImage || !source) return;
+  fullscreenImage.src = source;
+  fullscreenImage.alt = altText || 'Certificate full screen view';
+  fullscreenOverlay.classList.remove('hidden');
+  requestFullscreenSafe(fullscreenOverlay);
+};
+const closeFullscreen = () => {
+  if (!fullscreenOverlay) return;
+  fullscreenOverlay.classList.add('hidden');
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
+  }
+  if (fullscreenImage) {
+    fullscreenImage.src = '';
+  }
+};
+const closeProjectPreview = () => {
+  if (!projectOverlay) return;
+  projectOverlay.classList.add('hidden');
+  if (projectFrame) {
+    projectFrame.src = '';
+    projectFrame.classList.add('hidden');
+  }
+  if (projectImage) {
+    projectImage.src = '';
+    projectImage.classList.add('hidden');
+  }
+  if (projectMessage) {
+    projectMessage.textContent = '';
+    projectMessage.classList.add('hidden');
+  }
+};
+const openProjectPreview = ({ name, repoUrl, liveUrl, imageUrl }) => {
+  if (!projectOverlay) return;
+
+  if (projectTitle) {
+    projectTitle.textContent = name ? `${name} - Frontend Preview` : 'Project Frontend Preview';
+  }
+  if (projectRepoLink) {
+    projectRepoLink.href = repoUrl || '#';
+  }
+  if (projectLiveLink) {
+    if (liveUrl) {
+      projectLiveLink.href = liveUrl;
+      projectLiveLink.classList.remove('hidden');
+    } else {
+      projectLiveLink.classList.add('hidden');
+      projectLiveLink.href = '#';
+    }
+  }
+
+  if (projectFrame) {
+    projectFrame.classList.add('hidden');
+    projectFrame.src = '';
+  }
+  if (projectImage) {
+    projectImage.classList.add('hidden');
+    projectImage.src = '';
+  }
+  if (projectMessage) {
+    projectMessage.classList.add('hidden');
+    projectMessage.textContent = '';
+  }
+
+  if (liveUrl && projectFrame) {
+    projectFrame.src = liveUrl;
+    projectFrame.classList.remove('hidden');
+  } else if (imageUrl && projectImage) {
+    projectImage.src = imageUrl;
+    projectImage.alt = `${name || 'Project'} frontend preview`;
+    projectImage.classList.remove('hidden');
+  } else if (projectMessage) {
+    projectMessage.textContent = 'Live frontend is not deployed for this repository yet. Add a deployment URL and this button will display the running frontend directly.';
+    projectMessage.classList.remove('hidden');
+  }
+
+  projectOverlay.classList.remove('hidden');
+};
+if (resumeSection) {
+  if (viewResumeBtn) {
+    viewResumeBtn.addEventListener('click', showResume);
+  }
+  if (heroViewResumeBtn) {
+    heroViewResumeBtn.addEventListener('click', showResume);
+  }
+  if (aboutViewResumeBtn) {
+    aboutViewResumeBtn.addEventListener('click', showResume);
+  }
+  if (resumeBackBtn) {
+    resumeBackBtn.addEventListener('click', event => {
+      event.preventDefault();
+      activateTab('about');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+}
+if (heroAboutBtn) {
+  heroAboutBtn.addEventListener('click', event => {
+    event.preventDefault();
+    activateTab('about');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+if (fullscreenOverlay && fullscreenImage && fullscreenClose) {
+  document.querySelectorAll('.cert-card img').forEach(img => {
+    img.addEventListener('click', () => {
+      openCertificateFullscreen(img.src, img.alt);
+    });
+  });
+
+  // Ensure action buttons map to the same certificate card source.
+  document.querySelectorAll('.cert-card').forEach(card => {
+    const certImage = card.querySelector('img');
+    const actionLinks = card.querySelectorAll('.cert-actions .cert-link');
+    if (!certImage || actionLinks.length === 0) return;
+
+    actionLinks.forEach(link => {
+      const label = (link.textContent || '').trim().toLowerCase();
+      if (label === 'view') {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          openCertificateFullscreen(certImage.src, certImage.alt);
+        });
+      }
+
+      if (label === 'download') {
+        const source = certImage.getAttribute('src') || link.getAttribute('href') || '';
+        link.href = source;
+        link.setAttribute('download', source ? source.split('/').pop() : 'certificate');
+      }
+    });
+  });
+
+  fullscreenClose.addEventListener('click', closeFullscreen);
+  fullscreenOverlay.addEventListener('click', event => {
+    if (event.target === fullscreenOverlay) {
+      closeFullscreen();
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeFullscreen();
+    }
+  });
+}
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    console.log('Submitting contact form to EmailJS');
+
+    if (contactStatus) {
+      contactStatus.textContent = '';
+      contactStatus.className = 'contact-status';
+    }
+
+    if (contactSubmit) {
+      contactSubmit.disabled = true;
+      contactSubmit.textContent = 'Sending...';
+    }
+
+    if (
+      !EMAILJS_SERVICE_ID ||
+      !EMAILJS_TEMPLATE_ID ||
+      !EMAILJS_PUBLIC_KEY ||
+      EMAILJS_PUBLIC_KEY === 'PUBLIC_KEY'
+    ) {
+      const configError = 'EmailJS configuration is incomplete. Replace PUBLIC_KEY with your actual public key.';
+      console.error(configError, {
+        serviceId: EMAILJS_SERVICE_ID,
+        templateId: EMAILJS_TEMPLATE_ID,
+        publicKey: EMAILJS_PUBLIC_KEY,
+      });
+
+      if (contactStatus) {
+        contactStatus.textContent = configError;
+        contactStatus.classList.add('error');
+      }
+
+      if (contactSubmit) {
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = 'Send Message';
+      }
+
+      return;
+    }
+
+    try {
+      const response = await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm, {
+        publicKey: EMAILJS_PUBLIC_KEY,
+      });
+
+      console.log('EmailJS sendForm success:', response);
+
+      contactForm.reset();
+      if (contactStatus) {
+        contactStatus.textContent = 'Message sent successfully.';
+        contactStatus.classList.add('success');
+      }
+    } catch (error) {
+      console.error('EmailJS sendForm failed:', error);
+      if (contactStatus) {
+        contactStatus.textContent = 'Could not send message. Please try again.';
+        contactStatus.classList.add('error');
+      }
+    } finally {
+      if (contactSubmit) {
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = 'Send Message';
+      }
+    }
+  });
+}
+
+// Delegate certificate action handling so buttons work even if card wiring changes.
+document.addEventListener('click', event => {
+  const actionLink = event.target.closest('.cert-actions .cert-link');
+  if (!actionLink) return;
+
+  const card = actionLink.closest('.cert-card');
+  const certImage = card ? card.querySelector('img') : null;
+  const source = (certImage && certImage.getAttribute('src')) || actionLink.getAttribute('href') || '';
+  const label = (actionLink.textContent || '').trim().toLowerCase();
+
+  if (!source) return;
+
+  if (label === 'view') {
+    event.preventDefault();
+    if (fullscreenOverlay && fullscreenImage) {
+      openCertificateFullscreen(source, certImage ? certImage.alt : 'Certificate full screen view');
+    } else {
+      window.open(source, '_blank', 'noopener,noreferrer');
+    }
+  }
+
+  if (label === 'download') {
+    actionLink.href = source;
+    actionLink.setAttribute('download', source.split('/').pop() || 'certificate');
+  }
+});
+
+if (projectOverlay && projectClose) {
+  projectClose.addEventListener('click', closeProjectPreview);
+  projectOverlay.addEventListener('click', event => {
+    if (event.target === projectOverlay) {
+      closeProjectPreview();
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeProjectPreview();
+    }
+  });
+}
+</script>
+</body>
+</html>
